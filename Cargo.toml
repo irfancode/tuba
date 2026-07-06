@@ -1,0 +1,72 @@
+[package]
+name = "tuba"
+version = "1.1.0"
+edition = "2021"
+description = "Tuba — Unified terminal browser (fast, efficient, feature-rich)"
+authors = ["Tuba Contributors"]
+license = "MIT"
+repository = "https://github.com/anomalyco/opencode"
+homepage = "https://opencode.ai"
+keywords = ["browser", "terminal", "tui", "web", "reader"]
+categories = ["command-line-utilities", "web-programming"]
+
+[dependencies]
+# HTTP client with cookies, proxy, TLS
+reqwest = { version = "0.12", features = ["cookies", "socks", "gzip", "brotli"] }
+tokio = { version = "1", features = ["full"] }
+
+# HTML parsing & rendering
+scraper = "0.21"
+html2text = "0.6"
+
+# Headless Chromium for JS-rendered pages
+headless_chrome = "1"
+
+# Article extraction (Mozilla Readability)
+readability = "0.3"
+
+# TUI framework
+ratatui = { version = "0.28", features = ["all-widgets"] }
+crossterm = { version = "0.28", features = ["event-stream"] }
+
+# CLI argument parsing
+clap = { version = "4", features = ["derive", "env"] }
+
+# Terminal coloring (CLI mode)
+colored = "2"
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Logging
+log = "0.4"
+env_logger = "0.11"
+
+# URL parsing
+url = "2"
+
+# Unicode string width
+unicode-width = "0.2"
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Regex (for ad blocking, URL matching)
+regex = "1"
+
+# Random (for session IDs)
+uuid = { version = "1", features = ["v4"] }
+
+[[bin]]
+name = "tuba"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
